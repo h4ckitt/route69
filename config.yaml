@@ -1,0 +1,6 @@
+listenon: "localhost:6969"
+routes:
+  - token: "penis"
+    route: "localhost:8080"
+  - token: "PN"
+    route: "localhost:9090"
