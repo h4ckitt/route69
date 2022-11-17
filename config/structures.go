@@ -2,8 +2,15 @@ package config
 
 import "fmt"
 
-type Configuration struct {
-	routes map[string]string
+type ProxyConfiguration struct {
+	ListenAddress string
+	routes        map[string]string
+}
+
+type config struct {
+	ListenOn        string
+	RefreshInterval string
+	Routes          []routes
 }
 
 type routes struct {
@@ -11,7 +18,7 @@ type routes struct {
 	Route string
 }
 
-func (c *Configuration) Get(key string) string {
+func (c *ProxyConfiguration) GetRoute(key string) string {
 	if route, exists := c.routes[key]; exists {
 		return route
 	}
@@ -19,7 +26,7 @@ func (c *Configuration) Get(key string) string {
 	return ""
 }
 
-func (c *Configuration) PrintRoutes() {
+func (c *ProxyConfiguration) PrintRoutes() {
 	for token, route := range c.routes {
 		fmt.Printf("%s -> %s\n", token, route)
 	}
