@@ -19,7 +19,6 @@ func ReadInConfig() (*ProxyConfiguration, error) {
 		return nil, err
 	}
 
-	fmt.Println(string(file))
 	routesCache = make(map[string]string)
 
 	var c config
