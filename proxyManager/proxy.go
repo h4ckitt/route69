@@ -20,6 +20,7 @@ func NewProxyManager(r *config.ProxyConfiguration) *ProxyMan {
 }
 
 func (p *ProxyMan) Start() {
+	log.Printf("Starting Proxy Server On: %s\n", p.ListenAddress)
 	l, err := net.Listen("tcp", p.ListenAddress)
 
 	if err != nil {
@@ -84,6 +85,9 @@ func (p *ProxyMan) handle(c net.Conn) {
 
 	if err != nil {
 		log.Printf("An error occurred while serving that request ...... is the server up?: %v\n", err)
+		resp = &http.Response{}
+		resp.StatusCode = 422
+		_ = resp.Write(c)
 		return
 	}
 
